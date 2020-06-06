@@ -1,5 +1,5 @@
 
-package eu.basicairdata.graziano.Satellite;
+package eu.basicairdata.aditi.Satellite;
 
 import android.content.ContentValues;
 import android.content.Context;

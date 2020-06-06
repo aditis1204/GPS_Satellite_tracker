@@ -1,5 +1,5 @@
 
-package eu.basicairdata.graziano.Satellite;
+package eu.basicairdata.aditi.Satellite;
 
 class PhysicalData {
     String Value;       //The string of the Numerical value of the Physical Quantity

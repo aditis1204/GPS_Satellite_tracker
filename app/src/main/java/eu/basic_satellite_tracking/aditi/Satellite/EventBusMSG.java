@@ -1,5 +1,5 @@
 
-package eu.basicairdata.graziano.Satellite;
+package eu.basicairdata.aditi.Satellite;
 
 public class EventBusMSG {
 

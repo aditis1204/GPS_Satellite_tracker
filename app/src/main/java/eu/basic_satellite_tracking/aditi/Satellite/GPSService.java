@@ -1,5 +1,5 @@
 
-package eu.basicairdata.graziano.Satellite;
+package eu.basicairdata.aditi.Satellite;
 
 import android.app.Notification;
 import android.app.PendingIntent;
