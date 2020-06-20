@@ -1,5 +1,5 @@
 
-package eu.basicairdata.aditi.Satellite;
+package eu.basic_satellite_tracking.aditi.Satellite;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -26,7 +26,7 @@ class DatabaseHandler extends SQLiteOpenHelper {
     private static final int LOCATION_TYPE_PLACEMARK = 2;
 
     // Database Name
-    private static final String DATABASE_NAME = "GPSLogger";
+    private static final String DATABASE_NAME = "GPS";
 
     // -------------------------------------------------------------------------------- Table names
     private static final String TABLE_LOCATIONS = "locations";

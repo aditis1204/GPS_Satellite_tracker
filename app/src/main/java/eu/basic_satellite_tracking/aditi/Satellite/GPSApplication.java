@@ -1,5 +1,5 @@
 
-package eu.basicairdata.aditi.Satellite;
+package eu.basic_satellite_tracking.aditi.Satellite;
 
 import android.app.Application;
 import android.Manifest;
@@ -116,7 +116,8 @@ public class GPSApplication extends Application implements GpsStatus.Listener, L
     private boolean isContextMenuShareVisible = false;          // True if "Share with ..." menu is visible
     private boolean isContextMenuViewVisible = false;           // True if "View in *" menu is visible
     private String ViewInApp = "";                              // The string of default app name for "View"
-                                                                // "" in case of selector
+    private String _satelliteList = "";
+    // "" in case of selector
 
     // Singleton instance
     private static GPSApplication singleton;
@@ -386,18 +387,6 @@ public class GPSApplication extends Application implements GpsStatus.Listener, L
         }
     }
 
-    public boolean isContextMenuShareVisible() {
-        return isContextMenuShareVisible;
-    }
-
-    public boolean isContextMenuViewVisible() {
-        return isContextMenuViewVisible;
-    }
-
-    public String getViewInApp() {
-        return ViewInApp;
-    }
-
     public boolean isLocationPermissionChecked() {
         return LocationPermissionChecked;
     }
@@ -418,13 +407,7 @@ public class GPSApplication extends Application implements GpsStatus.Listener, L
         return GPSStatus;
     }
 
-    public int getPrefKMLAltitudeMode() {
-        return prefKMLAltitudeMode;
-    }
 
-    public int getPrefGPXVersion() {
-        return prefGPXVersion;
-    }
 
     public double getPrefAltitudeCorrection() {
         return prefAltitudeCorrection;
@@ -438,17 +421,6 @@ public class GPSApplication extends Application implements GpsStatus.Listener, L
         return prefShowDecimalCoordinates;
     }
 
-    public boolean getPrefExportKML() {
-        return prefExportKML;
-    }
-
-    public boolean getPrefExportGPX() {
-        return prefExportGPX;
-    }
-
-    public boolean getPrefExportTXT() {
-        return prefExportTXT;
-    }
 
     public int getPrefUM() {
         return prefUM;
@@ -476,6 +448,10 @@ public class GPSApplication extends Application implements GpsStatus.Listener, L
 
     public int getNumberOfSatellites() {
         return _NumberOfSatellites;
+    }
+
+    public String get_satelliteList() {
+        return _satelliteList;
     }
 
     public int getNumberOfSatellitesUsedInFix() {
@@ -530,7 +506,8 @@ public class GPSApplication extends Application implements GpsStatus.Listener, L
     }
 
     public void setGPSActivity_activeTab(int GPSActivity_activeTab) {
-        this.GPSActivity_activeTab = GPSActivity_activeTab;
+        System.out.println(GPSActivity_activeTab);
+        this.GPSActivity_activeTab = 1;
     }
 
     public List<ExportingTask> getExportingTaskList() {
@@ -800,7 +777,19 @@ public class GPSApplication extends Application implements GpsStatus.Listener, L
                     Iterable<GpsSatellite> sats = gs.getSatellites();
                     for (GpsSatellite sat : sats) {
                         sats_inview++;
-                        if (sat.usedInFix()) sats_used++;
+
+                        if (sat.usedInFix()) {
+                            sats_used++;
+                            int i =0;
+                            if(i<5){
+
+                            _satelliteList = _satelliteList+ "PRN No:" +sat.getPrn() + ", SNR: " + sat.getSnr() + ", Azimuth " +sat.getAzimuth()+", Elevation:"+sat.getElevation()+"\n";
+                           Log.d("Satellite_info",_satelliteList);
+                                i = i+1;
+
+
+                            }
+                        }
                         //Log.w("myApp", "[#] GPSApplication.java - updateSats: i=" + i);
                     }
                     _NumberOfSatellites = sats_inview;
@@ -1051,6 +1040,9 @@ public class GPSApplication extends Application implements GpsStatus.Listener, L
             LocationExtended eloc = new LocationExtended(loc);
             eloc.setNumberOfSatellites(getNumberOfSatellites());
             eloc.setNumberOfSatellitesUsedInFix(getNumberOfSatellitesUsedInFix());
+            eloc.setSatellite_info(get_satelliteList());
+
+           // eloc.setSatelliteDescription(get_satelliteList());
             boolean ForceRecord = false;
 
             gpsunavailablehandler.removeCallbacks(unavailr);                            // Cancel the previous unavail countdown handler
@@ -1103,9 +1095,11 @@ public class GPSApplication extends Application implements GpsStatus.Listener, L
                     _currentPlacemark = new LocationExtended(loc);
                     _currentPlacemark.setNumberOfSatellites(getNumberOfSatellites());
                     _currentPlacemark.setNumberOfSatellitesUsedInFix(getNumberOfSatellitesUsedInFix());
+                    _currentPlacemark.setSatellite_info(get_satelliteList());
                     PlacemarkRequest = false;
                     EventBus.getDefault().post(EventBusMSG.UPDATE_TRACK);
                     EventBus.getDefault().post(EventBusMSG.REQUEST_ADD_PLACEMARK);
+
                 }
                 PrevFix = eloc;
             }
@@ -1344,6 +1338,7 @@ public class GPSApplication extends Application implements GpsStatus.Listener, L
                     locationExtended = new LocationExtended(asyncTODO.location.getLocation());
                     locationExtended.setNumberOfSatellites(asyncTODO.location.getNumberOfSatellites());
                     locationExtended.setNumberOfSatellitesUsedInFix(asyncTODO.location.getNumberOfSatellitesUsedInFix());
+                    locationExtended.setSatellite_info(asyncTODO.location.getSatellite_info());
                     _currentLocationExtended = locationExtended;
                     EventBus.getDefault().post(EventBusMSG.UPDATE_FIX);
                     track.add(locationExtended);
@@ -1360,6 +1355,8 @@ public class GPSApplication extends Application implements GpsStatus.Listener, L
                     locationExtended.setDescription(asyncTODO.location.getDescription());
                     locationExtended.setNumberOfSatellites(asyncTODO.location.getNumberOfSatellites());
                     locationExtended.setNumberOfSatellitesUsedInFix(asyncTODO.location.getNumberOfSatellitesUsedInFix());
+                    locationExtended.setSatellite_info(asyncTODO.location.getSatellite_info());
+                  // locationExtended.setSatelliteinfo(asyncTODO.location.get_satellit)
                     track.addPlacemark(locationExtended);
                     GPSDataBase.addPlacemarkToTrack(locationExtended, track);
                     _currentTrack = track;
@@ -1372,6 +1369,7 @@ public class GPSApplication extends Application implements GpsStatus.Listener, L
                     _currentLocationExtended = new LocationExtended(asyncTODO.location.getLocation());
                     _currentLocationExtended.setNumberOfSatellites(asyncTODO.location.getNumberOfSatellites());
                     _currentLocationExtended.setNumberOfSatellitesUsedInFix(asyncTODO.location.getNumberOfSatellitesUsedInFix());
+                    _currentLocationExtended.setSatellite_info(asyncTODO.location.getSatellite_info());
                     EventBus.getDefault().post(EventBusMSG.UPDATE_FIX);
                 }
 
@@ -1478,7 +1476,7 @@ public class GPSApplication extends Application implements GpsStatus.Listener, L
                 NumberOfLocations = track.getNumberOfLocations();
 
                 // Setup Paints
-                drawPaint.setColor(getResources().getColor(R.color.colorThumbnailLineColor));
+                //drawPaint.setColor(getResources().getColor(R.color.colorThumbnailLineColor));
                 drawPaint.setAntiAlias(true);
                 drawPaint.setStrokeWidth(getResources().getDimension(R.dimen.thumbLineWidth));
                 //drawPaint.setStrokeWidth(2);
@@ -1494,7 +1492,7 @@ public class GPSApplication extends Application implements GpsStatus.Listener, L
                 BGPaint.setStrokeJoin(Paint.Join.ROUND);
                 BGPaint.setStrokeCap(Paint.Cap.ROUND);
 
-                EndDotdrawPaint.setColor(getResources().getColor(R.color.colorThumbnailLineColor));
+            //    EndDotdrawPaint.setColor(getResources().getColor(R.color.colorThumbnailLineColor));
                 EndDotdrawPaint.setAntiAlias(true);
                 EndDotdrawPaint.setStrokeWidth(getResources().getDimension(R.dimen.thumbLineWidth) * 2.5f);
                 EndDotdrawPaint.setStyle(Paint.Style.STROKE);

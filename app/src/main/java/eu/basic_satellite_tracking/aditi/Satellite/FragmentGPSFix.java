@@ -1,5 +1,5 @@
 
-package eu.basicairdata.aditi.Satellite;
+package eu.basic_satellite_tracking.aditi.Satellite;
 
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -46,15 +46,15 @@ public class FragmentGPSFix extends Fragment {
     private TextView TVGPSFixStatus;
     private TextView TVDirectionUM;
     private TextView TVTime;
-    private TextView TVSatellites;
-
+    public TextView TVSatellites;
+    public TextView TVSatellites1;
     private TableLayout TLCoordinates;
     private TableLayout TLAltitude;
     private TableLayout TLSpeed;
     private TableLayout TLBearing;
     private TableLayout TLAccuracy;
     private TableLayout TLTime;
-    private TableLayout TLSatellites;
+    public TableLayout TLSatellites;
 
     private LinearLayout LLTimeSatellites;
 
@@ -109,6 +109,8 @@ public class FragmentGPSFix extends Fragment {
         TVDirectionUM       = view.findViewById(R.id.id_textView_BearingUM);
         TVTime              = view.findViewById(R.id.id_textView_Time);
         TVSatellites        = view.findViewById(R.id.id_textView_satellite1);
+        TVSatellites1        = view.findViewById(R.id.id_textView_satellite2);
+
 
         // TableLayouts
         TLCoordinates       = view.findViewById(R.id.id_TableLayout_Coordinates) ;
@@ -202,7 +204,12 @@ public class FragmentGPSFix extends Fragment {
                 //TVAccuracyUM.setText(phdAccuracy.UM);
                 //TVTime.setText(phdTime.Value);
                 TVSatellites.setText(location.getNumberOfSatellitesUsedInFix() != NOT_AVAILABLE ? location.getNumberOfSatellitesUsedInFix() + "/" + location.getNumberOfSatellites() : "");
+                int i =0;
+                while(i<10) {
 
+                    TVSatellites1.setText(location.getSatellite_info());
+                    i = i + 1;
+                }
                 // Colorize the Altitude textview depending on the altitude EGM Correction
                 isValidAltitude = EGMAltitudeCorrection && (location.getAltitudeEGM96Correction() != NOT_AVAILABLE);
                 TVAltitude.setTextColor(isValidAltitude ? getResources().getColor(R.color.textColorPrimary) : getResources().getColor(R.color.textColorSecondary));

@@ -3,10 +3,11 @@
 
 
 <resources>
-    <string name="app_name" translatable="false">GPS Logger</string>
+    <string name="app_name" translatable="false">Satellite_Tracker</string>
 
     <!-- Tabs -->
-    <string name="tab_gpsfix">GPS Fix</string>
+
+ <!--   <string name="tab_gpsfix">GPS Coordinates</string> -->
 
     <!-- GPS Fix -->
     <string name="latitude">Latitude</string>
@@ -107,40 +108,9 @@
     <string name="dlg_app_killed_description">Please check in Android Settings that the app is not Battery optimized and not even Background restricted.</string>
     <string name="open_android_app_settings">Open Settings</string>
 
-    <!-- Preferences -->
-    <string name="pref_category_interface">INTERFACE</string>
-    <string name="pref_keep_screen_on">Keep Screen On</string>
-    <string name="pref_keep_screen_on_summary">Battery drains faster</string>
-    <string name="pref_color_theme">Color Theme</string>
-    <string name="pref_color_theme_dark">Dark</string>
-    <string name="pref_color_theme_light">Light</string>
-    <string name="pref_show_decimal_coordinates">Show Decimal Coordinates</string>
-    <string name="pref_show_decimal_coordinates_summary">Fractional part in decimal notation</string>
-    <string name="pref_show_directions">Show Directions using</string>
-    <string name="pref_show_directions_angle">Degrees East of North</string>
-    <string name="pref_show_directions_cardinal">Cardinal Points</string>
-    <string name="pref_unit_of_measurement">System of Measurement</string>
-    <string name="pref_unit_of_measurement_metric">Metric</string>
-    <string name="pref_unit_of_measurement_imperial">Imperial</string>
-    <string name="pref_unit_of_measurement_aerial_nautical">Aerial / Nautical</string>
-    <string name="pref_unit_of_measurement_speed">Show Speeds in</string>
-    <string name="pref_view_tracks_with">View Tracks with</string>
-    <string name="pref_view_tracks_with_KML">KML viewer</string>
-    <string name="pref_view_tracks_with_GPX">GPX viewer</string>
 
-    <string name="pref_category_tracking">TRACKING</string>
-    <string name="pref_GPS_distance">Collecting Density</string>
-    <string name="pref_GPS_distance_max">Maximum</string>
-    <string name="pref_GPS_distance_1m">1 meter</string>
-    <string name="pref_GPS_distance_2m">2 meters</string>
-    <string name="pref_GPS_distance_5m">5 meters</string>
-    <string name="pref_GPS_distance_10m">10 meters</string>
-    <string name="pref_GPS_distance_20m">20 meters</string>
-    <string name="pref_GPS_distance_3ft">3 feet</string>
-    <string name="pref_GPS_distance_6ft">6 feet</string>
-    <string name="pref_GPS_distance_16ft">16 feet</string>
-    <string name="pref_GPS_distance_33ft">33 feet</string>
-    <string name="pref_GPS_distance_66ft">66 feet</string>
+
+
 
     <string name="pref_GPS_update_frequency">GPS Update Interval</string>
     <string name="pref_GPS_update_frequency_max">The shortest available</string>
@@ -183,8 +153,6 @@
 
     <!-- About Dialog -->
     <string name="about_version">ver.</string>
-    <string name="about_description">Copyright (C) 2016 BasicAirData\nhttp://www.basicairdata.eu\n\nBasicAirData GPS Logger records your tracks using GPS. You can view them in your preferred viewer, share, and export them in GPSLogger folder of your device in KML, GPX, and TXT format.\n\nThis program is free software, released under the terms of the GNU General Public License.\nFor more details see: http://www.gnu.org/licenses/gpl.txt\n\nFor EGM96 geoid file disclaimer see: http://earth-info.nga.mil/GandG/disclaim.html</string>
-    <string name="about_description_googleplaystore">Copyright (C) 2016 BasicAirData\nhttp://www.basicairdata.eu\n\nBasicAirData GPS Logger records your tracks using GPS. You can view them in your preferred viewer, share, and export them in GPSLogger folder of your device in KML, GPX, and TXT format.\n\nThis program is free software, released under the terms of the GNU General Public License.\nFor more details see: http://www.gnu.org/licenses/gpl.txt\n\nFor EGM96 geoid file disclaimer see: http://earth-info.nga.mil/GandG/disclaim.html\n\nIf You enjoy using this app, please take a moment to rate GPS Logger in the Google Store.</string>
     <string name="about_ok">Close</string>
     <string name="about_rate_this_app">Rate this App</string>
     <string name="about_unable_to_rate">Unable to reach the Store</string>
@@ -206,5 +174,6 @@
     <string name="UM_mph">mph</string>
     <string name="UM_nm">NM</string>
     <string name="UM_kn">kn</string>
+    <string name="tab_gpsfix">fix</string>
 
 </resources>

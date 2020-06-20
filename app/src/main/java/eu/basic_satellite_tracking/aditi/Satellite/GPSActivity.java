@@ -1,5 +1,5 @@
 
-package eu.basicairdata.aditi.Satellite;
+package eu.basic_satellite_tracking.aditi.Satellite;
 
 import android.Manifest;
 import android.content.Context;
@@ -35,6 +35,7 @@ import android.view.WindowManager;
 import android.widget.Toast;
 
 import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Logger;
 import org.greenrobot.eventbus.Subscribe;
 
 import java.io.File;
@@ -68,27 +69,10 @@ public class GPSActivity extends AppCompatActivity {
 
 
     @Override
-    public void onRestart(){
-        Log.w("myApp", "[#] " + this + " - onRestart()");
-
-        if (Integer.valueOf(PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("prefColorTheme", "2")) != theme) {
-            Log.w("myApp", "[#] GPSActivity.java - it needs to be recreated (Theme changed)");
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                // Normal behaviour for Android 5 +
-                this.recreate();
-            } else {
-                // Workaround to a bug on Android 4.4.X platform (google won't fix because Android 4.4 is obsolete)
-                // Android 4.4.X: taskAffinity & launchmode='singleTask' violating Activity's lifecycle
-                // https://issuetracker.google.com/issues/36998700
-                finish();
-                startActivity(new Intent(this, getClass()));
-            }
-            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-        }
+    public void onRestart() {
         super.onRestart();
+        startActivity(new Intent(this, getClass()));
     }
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.w("myApp", "[#] " + this + " - onCreate()");
@@ -117,6 +101,7 @@ public class GPSActivity extends AppCompatActivity {
                     public void onTabSelected(TabLayout.Tab tab) {
                         super.onTabSelected(tab);
                         activeTab = tab.getPosition();
+                        System.out.println(activeTab);
                         GPSApp.setGPSActivity_activeTab(activeTab);
                         updateBottomSheetPosition();
                         ActivateActionModeIfNeeded();
@@ -137,6 +122,7 @@ public class GPSActivity extends AppCompatActivity {
         Log.w("myApp", "[#] " + this + " - onStart()");
         super.onStart();
         activeTab = tabLayout.getSelectedTabPosition();
+        System.out.println(activeTab);
         GPSApp.setGPSActivity_activeTab(activeTab);
     }
 
@@ -197,7 +183,7 @@ public class GPSActivity extends AppCompatActivity {
                 });
             }
             else builder.setMessage(getResources().getString(R.string.dlg_app_killed));
-            builder.setIcon(android.R.drawable.ic_menu_info_details);
+            //builder.setIcon(android.R.drawable.ic_menu_info_details);
             builder.setPositiveButton(R.string.about_ok, new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int id) {
                     dialog.dismiss();

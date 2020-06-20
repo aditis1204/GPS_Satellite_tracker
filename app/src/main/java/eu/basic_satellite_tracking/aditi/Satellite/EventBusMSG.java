@@ -1,5 +1,5 @@
 
-package eu.basicairdata.aditi.Satellite;
+package eu.basic_satellite_tracking.aditi.Satellite;
 
 public class EventBusMSG {
 

@@ -212,7 +212,6 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textAppearance="@style/TextAppearanceLargeNumbers"
                         android:id="@+id/id_textView_Altitude"
                         android:freezesText="true"
                         android:textStyle="bold"
@@ -221,7 +220,6 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textAppearance="@style/TextAppearanceLargeUM"
                         android:id="@+id/id_textView_AltitudeUM"
                         android:layout_weight="0"
                         android:layout_marginLeft="7dp"
@@ -383,30 +381,45 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:gravity="center_horizontal">
-
+                android:gravity="center_horizontal"
+                android:text="Satellites Count">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/id_textView_satellite"
-                    android:text="Satellites Count"
+                    android:text="Satellites Count: No of satellite used to fix location/total no of available satellites"
 
                     android:freezesText="true"
                     android:textStyle="bold"
                     android:gravity="center_horizontal" />
-
                 <TextView
                     android:id="@+id/id_textView_satellite1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="60dp"
-                    android:gravity="center_horizontal"
+                    android:layout_width="match_parent"
 
 
 
+                    android:layout_weight="0"
+                    android:gravity="center_horizontal" />
+
+                <TextView
+                    android:id="@+id/id_textView_satellite2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="7dp"
+
+
                     android:layout_marginLeft="7dp"
-                    android:layout_weight="0" />
+                    android:layout_weight="0"
+                    android:gravity="center_horizontal" />
+
+
+
+
             </TableLayout>
+
+
+
+
 
 
 
@@ -414,7 +427,11 @@
 
         </LinearLayout>
 
+
+
     </LinearLayout>
+
+
 
     <TextView
         android:layout_width="fill_parent"
