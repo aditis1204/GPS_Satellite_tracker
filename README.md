@@ -8,4 +8,4 @@
 * getSnr() method returns signal to noise ratio
 * usedInFix() method returns Returns true if the satellite was used by the GPS engine when calculating the most recent GPS fix
 
-<img src = "output2.jpeg" width = "250" height="500"/>
+<img src = "output2.jpeg" width = "350" height="600"/>
