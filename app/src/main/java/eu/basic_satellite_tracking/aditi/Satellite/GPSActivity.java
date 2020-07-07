@@ -69,10 +69,27 @@ public class GPSActivity extends AppCompatActivity {
 
 
     @Override
-    public void onRestart() {
+    public void onRestart(){
+        Log.w("myApp", "[#] " + this + " - onRestart()");
+
+        if (Integer.valueOf(PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("prefColorTheme", "2")) != theme) {
+            Log.w("myApp", "[#] GPSActivity.java - it needs to be recreated (Theme changed)");
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                // Normal behaviour for Android 5 +
+                this.recreate();
+            } else {
+                // Workaround to a bug on Android 4.4.X platform (google won't fix because Android 4.4 is obsolete)
+                // Android 4.4.X: taskAffinity & launchmode='singleTask' violating Activity's lifecycle
+                // https://issuetracker.google.com/issues/36998700
+                finish();
+                startActivity(new Intent(this, getClass()));
+            }
+            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+        }
         super.onRestart();
-        startActivity(new Intent(this, getClass()));
     }
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.w("myApp", "[#] " + this + " - onCreate()");
@@ -101,7 +118,6 @@ public class GPSActivity extends AppCompatActivity {
                     public void onTabSelected(TabLayout.Tab tab) {
                         super.onTabSelected(tab);
                         activeTab = tab.getPosition();
-                        System.out.println(activeTab);
                         GPSApp.setGPSActivity_activeTab(activeTab);
                         updateBottomSheetPosition();
                         ActivateActionModeIfNeeded();
@@ -183,7 +199,7 @@ public class GPSActivity extends AppCompatActivity {
                 });
             }
             else builder.setMessage(getResources().getString(R.string.dlg_app_killed));
-            //builder.setIcon(android.R.drawable.ic_menu_info_details);
+            builder.setIcon(android.R.drawable.ic_menu_info_details);
             builder.setPositiveButton(R.string.about_ok, new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int id) {
                     dialog.dismiss();
@@ -299,7 +315,7 @@ public class GPSActivity extends AppCompatActivity {
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new FragmentGPSFix(), getString(R.string.tab_gpsfix));
+        adapter.addFragment(new FragmentGPSFix(), getString(R.string.tab_gpsfix1));
         //adapter.addFragment(new FragmentTrack(), getString(R.string.tab_track));
         //adapter.addFragment(new FragmentTracklist(), getString(R.string.tab_tracklist));
         viewPager.setAdapter(adapter);
@@ -333,16 +349,16 @@ public class GPSActivity extends AppCompatActivity {
             return mFragmentTitleList.get(position);
         }
     }
-/*
-    @Subscribe
-    public void onEvent(EventBusMSGNormal msg) {
-        switch (msg.MSGType) {
-            case EventBusMSG.TRACKLIST_SELECT:
-            case EventBusMSG.TRACKLIST_DESELECT:
-                ActivateActionModeIfNeeded();
+    /*
+        @Subscribe
+        public void onEvent(EventBusMSGNormal msg) {
+            switch (msg.MSGType) {
+                case EventBusMSG.TRACKLIST_SELECT:
+                case EventBusMSG.TRACKLIST_DESELECT:
+                    ActivateActionModeIfNeeded();
+            }
         }
-    }
-*/
+    */
     @Subscribe
     public void onEvent(Short msg) {
         switch (msg) {
@@ -460,8 +476,8 @@ public class GPSActivity extends AppCompatActivity {
             public void run() {
                 if ((GPSApp.getNumberOfSelectedTracks() > 0) && (activeTab == 2)) {
                     if (actionMode == null)
-                       // actionMode = (startSupportActionMode(new ToolbarActionMode()));
-                    actionMode.setTitle(GPSApp.getNumberOfSelectedTracks() > 1 ? String.valueOf(GPSApp.getNumberOfSelectedTracks()) : "");
+                        // actionMode = (startSupportActionMode(new ToolbarActionMode()));
+                        actionMode.setTitle(GPSApp.getNumberOfSelectedTracks() > 1 ? String.valueOf(GPSApp.getNumberOfSelectedTracks()) : "");
                 } else if (actionMode != null) {
                     actionMode.finish();
                     actionMode = null;

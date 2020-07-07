@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -110,6 +111,7 @@ public class FragmentGPSFix extends Fragment {
         TVTime              = view.findViewById(R.id.id_textView_Time);
         TVSatellites        = view.findViewById(R.id.id_textView_satellite1);
         TVSatellites1        = view.findViewById(R.id.id_textView_satellite2);
+        TVSatellites1.setMovementMethod(new ScrollingMovementMethod());
 
 
         // TableLayouts
@@ -195,14 +197,13 @@ public class FragmentGPSFix extends Fragment {
                 TVLongitude.setText(phdLongitude.Value);
                 TVLatitudeUM.setText(phdLatitude.UM);
                 TVLongitudeUM.setText(phdLongitude.UM);
-                //TVAltitude.setText(phdAltitude.Value);
-                //TVAltitudeUM.setText(phdAltitude.UM);
-               // TVSpeed.setText(phdSpeed.Value);
-               // TVSpeedUM.setText(phdSpeed.UM);
-                TVBearing.setText(phdBearing.Value);
-               // TVAccuracy.setText(phdAccuracy.Value);
+                //TVAltitude.setText(phdAltitude.Value);TVAltitudeUM.setText(phdAltitude.UM);
+                //TVSpeed.setText(phdSpeed.Value);
+                //TVSpeedUM.setText(phdSpeed.UM);
+                //TVBearing.setText(phdBearing.Value);
+                //TVAccuracy.setText(phdAccuracy.Value);
                 //TVAccuracyUM.setText(phdAccuracy.UM);
-                //TVTime.setText(phdTime.Value);
+                //  TVTime.setText(phdTime.Value);
                 TVSatellites.setText(location.getNumberOfSatellitesUsedInFix() != NOT_AVAILABLE ? location.getNumberOfSatellitesUsedInFix() + "/" + location.getNumberOfSatellites() : "");
                 int i =0;
                 while(i<10) {

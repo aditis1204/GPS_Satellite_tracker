@@ -58,7 +58,7 @@
                 </TableRow>
 
                 <TextView
-                    android:text="@string/latitude"
+                    android:text="latitude"
                     android:id="@+id/id_textView_LatitudeLabel"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
@@ -81,13 +81,13 @@
                     android:layout_gravity="center_horizontal"
                     android:gravity="center_horizontal">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/id_textView_Longitude"
-                    android:freezesText="true"
-                    android:textStyle="bold"
-                    android:gravity="center_horizontal" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/id_textView_Longitude"
+                        android:freezesText="true"
+                        android:textStyle="bold"
+                        android:gravity="center_horizontal" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -102,7 +102,7 @@
                 <TextView
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/longitude"
+                    android:text="longitude"
                     android:id="@+id/id_textView_LongitudeLabel"
                     android:textSize="13sp"
                     android:gravity="center_horizontal" />
@@ -297,7 +297,7 @@
                 android:paddingTop="3dp"
                 android:paddingBottom="3dp"
                 android:layout_margin="3dp"
-                android:visibility="invisible">
+                android:visibility="visible">
 
                 <TableRow
                     android:layout_width="fill_parent"
@@ -326,7 +326,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:text="@string/accuracy"
+                    android:text="accuracy"
                     android:id="@+id/id_textView_AccuracyLabel"
                     android:textSize="13sp"
                     android:gravity="center_horizontal" />
@@ -340,7 +340,6 @@
                 android:id="@+id/id_TableLayout_Bearing"
                 android:paddingTop="3dp"
                 android:paddingBottom="3dp"
-                android:layout_margin="3dp"
                 android:visibility="invisible">
 
                 <TableRow
@@ -368,7 +367,7 @@
 
                 <TextView
                     android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:text="@string/direction"
+                    android:text="direction"
                     android:id="@+id/id_textView_BearingLabel"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
@@ -380,9 +379,11 @@
             <TableLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:gravity="center_horizontal"
+
                 android:text="Satellites Count">
+                <View
+                    android:layout_height="2dip"
+                    android:background="#FF909090" />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -397,7 +398,6 @@
                     android:layout_width="match_parent"
 
 
-
                     android:layout_weight="0"
                     android:gravity="center_horizontal" />
 
@@ -405,10 +405,17 @@
                     android:id="@+id/id_textView_satellite2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="7dp"
+
+                    android:scrollbarAlwaysDrawVerticalTrack="true"
+                    android:typeface="sans"
+                    style="@style/scrollbar_shape_style"
+                    android:scrollIndicators="right"
 
 
-                    android:layout_marginLeft="7dp"
+
+
+
+
                     android:layout_weight="0"
                     android:gravity="center_horizontal" />
 

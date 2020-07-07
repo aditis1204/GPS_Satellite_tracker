@@ -8,4 +8,4 @@
 * getSnr() method returns signal to noise ratio
 * usedInFix() method returns Returns true if the satellite was used by the GPS engine when calculating the most recent GPS fix
 * Module Integrated with existing MapMint4ME.
-<img src = "output.jpg" width = "250" height="500"/>
+<img src = "output2.jpg" width = "250" height="500"/>

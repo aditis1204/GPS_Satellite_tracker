@@ -175,5 +175,6 @@
     <string name="UM_nm">NM</string>
     <string name="UM_kn">kn</string>
     <string name="tab_gpsfix">fix</string>
+    <string name="tab_gpsfix1">tab_gpsfix1</string>
 
 </resources>

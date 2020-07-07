@@ -48,6 +48,7 @@ import java.util.StringTokenizer;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
+
 public class GPSApplication extends Application implements GpsStatus.Listener, LocationListener {
 
     //private static final float M_TO_FT = 3.280839895f;
@@ -707,7 +708,7 @@ public class GPSApplication extends Application implements GpsStatus.Listener, L
         if (msg == EventBusMSG.APP_PAUSE) {
             handler.postDelayed(r, getHandlerTimer());  // Starts the switch-off handler (delayed by HandlerTimer)
             if ((_currentTrack.getNumberOfLocations() == 0) && (_currentTrack.getNumberOfPlacemarks() == 0)
-                && (!Recording) && (!PlacemarkRequest)) StopAndUnbindGPSService();
+                    && (!Recording) && (!PlacemarkRequest)) StopAndUnbindGPSService();
             System.gc();                                // Clear mem from released objects with Garbage Collector
             return;
         }
@@ -783,8 +784,8 @@ public class GPSApplication extends Application implements GpsStatus.Listener, L
                             int i =0;
                             if(i<5){
 
-                            _satelliteList = _satelliteList+ "PRN No:" +sat.getPrn() + ", SNR: " + sat.getSnr() + ", Azimuth " +sat.getAzimuth()+", Elevation:"+sat.getElevation()+"\n";
-                           Log.d("Satellite_info",_satelliteList);
+                                _satelliteList = _satelliteList+ "PRN No:" +sat.getPrn() + ", SNR: " + sat.getSnr() + ", Azimuth " +sat.getAzimuth()+", Elevation:"+sat.getElevation()+"\n";
+                                Log.d("Satellite_info",_satelliteList);
                                 i = i+1;
 
 
@@ -870,7 +871,7 @@ public class GPSApplication extends Application implements GpsStatus.Listener, L
             for (Track T : _ArrayListTracks) {
                 if (T.isSelected()) {
                     T.setSelected(false);
-                 //   EventBus.getDefault().post(new EventBusMSGNormal(EventBusMSG.TRACKLIST_DESELECT, T.getId()));
+                    //   EventBus.getDefault().post(new EventBusMSGNormal(EventBusMSG.TRACKLIST_DESELECT, T.getId()));
                 }
             }
         }
@@ -896,30 +897,30 @@ public class GPSApplication extends Application implements GpsStatus.Listener, L
         JobType = jobType;
     }
 
-/*
-    public void ExecuteExportingTask (ExportingTask exportingTask) {
-        switch (JobType) {
-            case JOB_TYPE_NONE:
-            case JOB_TYPE_DELETE:
-                break;
-            case JOB_TYPE_EXPORT:
-                Ex = new Exporter(exportingTask, prefExportKML, prefExportGPX, prefExportTXT, Environment.getExternalStorageDirectory() + "/GPSLogger");
-                Ex.start();
-                break;
-            case JOB_TYPE_VIEW:
-                if (prefViewTracksWith == 0) Ex = new Exporter(exportingTask, true, false, false, Environment.getExternalStorageDirectory() + "/GPSLogger/AppData");
-                if (prefViewTracksWith == 1) Ex = new Exporter(exportingTask, false, true, false, Environment.getExternalStorageDirectory() + "/GPSLogger/AppData");
-                Ex.start();
-                break;
-            case JOB_TYPE_SHARE:
-                Ex = new Exporter(exportingTask, prefExportKML, prefExportGPX, prefExportTXT, Environment.getExternalStorageDirectory() + "/GPSLogger/AppData");
-                Ex.start();
-                break;
-            default:
-                break;
+    /*
+        public void ExecuteExportingTask (ExportingTask exportingTask) {
+            switch (JobType) {
+                case JOB_TYPE_NONE:
+                case JOB_TYPE_DELETE:
+                    break;
+                case JOB_TYPE_EXPORT:
+                    Ex = new Exporter(exportingTask, prefExportKML, prefExportGPX, prefExportTXT, Environment.getExternalStorageDirectory() + "/GPSLogger");
+                    Ex.start();
+                    break;
+                case JOB_TYPE_VIEW:
+                    if (prefViewTracksWith == 0) Ex = new Exporter(exportingTask, true, false, false, Environment.getExternalStorageDirectory() + "/GPSLogger/AppData");
+                    if (prefViewTracksWith == 1) Ex = new Exporter(exportingTask, false, true, false, Environment.getExternalStorageDirectory() + "/GPSLogger/AppData");
+                    Ex.start();
+                    break;
+                case JOB_TYPE_SHARE:
+                    Ex = new Exporter(exportingTask, prefExportKML, prefExportGPX, prefExportTXT, Environment.getExternalStorageDirectory() + "/GPSLogger/AppData");
+                    Ex.start();
+                    break;
+                default:
+                    break;
+            }
         }
-    }
-*/
+    */
     public void ExecuteJob () {
         if (!ExportingTaskList.isEmpty()) {
             switch (JobType) {
@@ -1036,13 +1037,13 @@ public class GPSApplication extends Application implements GpsStatus.Listener, L
             //loc.setTime(loc.getTime() - 619315200000L);                               // Commented out, it simulate the old GPS hardware Timestamp
             if (loc.getTime() <= 1388534400000L)                                        // if the Location Time is <= 01/01/2014 00:00:00.000
                 loc.setTime(loc.getTime() + 619315200000L);                             // Timestamp incremented by 1024×7×24×60×60×1000 = 619315200000 ms
-                                                                                        // This value must be doubled every 1024 weeks !!!
+            // This value must be doubled every 1024 weeks !!!
             LocationExtended eloc = new LocationExtended(loc);
             eloc.setNumberOfSatellites(getNumberOfSatellites());
             eloc.setNumberOfSatellitesUsedInFix(getNumberOfSatellitesUsedInFix());
             eloc.setSatellite_info(get_satelliteList());
 
-           // eloc.setSatelliteDescription(get_satelliteList());
+            // eloc.setSatelliteDescription(get_satelliteList());
             boolean ForceRecord = false;
 
             gpsunavailablehandler.removeCallbacks(unavailr);                            // Cancel the previous unavail countdown handler
@@ -1221,7 +1222,7 @@ public class GPSApplication extends Application implements GpsStatus.Listener, L
         prefGPSdistance = Float.valueOf(preferences.getString("prefGPSdistance", "0"));
         prefEGM96AltitudeCorrection = preferences.getBoolean("prefEGM96AltitudeCorrection", false);
         prefAltitudeCorrection = Double.valueOf(preferences.getString("prefAltitudeCorrection", "0"));
-            Log.w("myApp", "[#] GPSApplication.java - Manual Correction set to " + prefAltitudeCorrection + " m");
+        Log.w("myApp", "[#] GPSApplication.java - Manual Correction set to " + prefAltitudeCorrection + " m");
         prefExportKML = preferences.getBoolean("prefExportKML", true);
         prefExportGPX = preferences.getBoolean("prefExportGPX", true);
         prefExportTXT = preferences.getBoolean("prefExportTXT", false);
@@ -1356,7 +1357,7 @@ public class GPSApplication extends Application implements GpsStatus.Listener, L
                     locationExtended.setNumberOfSatellites(asyncTODO.location.getNumberOfSatellites());
                     locationExtended.setNumberOfSatellitesUsedInFix(asyncTODO.location.getNumberOfSatellitesUsedInFix());
                     locationExtended.setSatellite_info(asyncTODO.location.getSatellite_info());
-                  // locationExtended.setSatelliteinfo(asyncTODO.location.get_satellit)
+                    // locationExtended.setSatelliteinfo(asyncTODO.location.get_satellit)
                     track.addPlacemark(locationExtended);
                     GPSDataBase.addPlacemarkToTrack(locationExtended, track);
                     _currentTrack = track;
@@ -1492,7 +1493,7 @@ public class GPSApplication extends Application implements GpsStatus.Listener, L
                 BGPaint.setStrokeJoin(Paint.Join.ROUND);
                 BGPaint.setStrokeCap(Paint.Cap.ROUND);
 
-            //    EndDotdrawPaint.setColor(getResources().getColor(R.color.colorThumbnailLineColor));
+                //    EndDotdrawPaint.setColor(getResources().getColor(R.color.colorThumbnailLineColor));
                 EndDotdrawPaint.setAntiAlias(true);
                 EndDotdrawPaint.setStrokeWidth(getResources().getDimension(R.dimen.thumbLineWidth) * 2.5f);
                 EndDotdrawPaint.setStyle(Paint.Style.STROKE);
